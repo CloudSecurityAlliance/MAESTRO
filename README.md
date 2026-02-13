@@ -14,6 +14,10 @@ This tool is based on the **MAESTRO** framework for agentic AI threat modeling, 
 
 We highly recommend reading the paper to understand the seven-layer architecture and the principles behind this tool.
 
+### Related Resources
+
+- **Playbook**: [OWASP MAESTRO Threat Modeling Playbook](https://github.com/agentic-threat-modeling/MAESTRO) - A structured methodology companion with checklists, threat taxonomy IDs, mitigation catalogs, scoring, templates, and worked examples. Based on the [OWASP MAS Threat Modelling Guide v1.0](https://genai.owasp.org/resource/multi-agentic-system-threat-modeling-guide-v1-0/).
+
 ## Features
 
 - **Detailed Architecture Input**: Provides a textarea for users to describe their system architecture, which is used by the AI for analysis.
