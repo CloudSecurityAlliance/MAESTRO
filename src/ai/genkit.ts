@@ -1,6 +1,7 @@
 import {genkit} from 'genkit';
 import {googleAI} from '@genkit-ai/googleai';
 import openAI from '@genkit-ai/compat-oai/openai';
+import {openAICompatible} from '@genkit-ai/compat-oai';
 import {ollama} from 'genkitx-ollama';
 
 const provider = process.env.LLM_PROVIDER ?? 'google';
@@ -17,6 +18,14 @@ switch (provider) {
   case 'openai':
     config.plugins = [openAI({apiKey: process.env.OPENAI_API_KEY})];
     config.model = `openai/${process.env.LLM_MODEL || 'gpt-4o-mini'}`;
+    break;
+  case 'anthropic':
+    config.plugins = [openAICompatible({
+      name: 'anthropic',
+      apiKey: process.env.ANTHROPIC_API_KEY,
+      baseURL: 'https://api.anthropic.com/v1/',
+    })];
+    config.model = `anthropic/${process.env.LLM_MODEL || 'claude-sonnet-4-5'}`;
     break;
   case 'ollama':
     config.plugins = [ollama({

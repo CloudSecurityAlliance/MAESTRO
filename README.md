@@ -50,7 +50,7 @@ Follow these instructions to set up and run the project locally.
 
 3. **Set up environment variables:**
    - Create a `.env` file in the root of the project.
-   - Choose which provider to use by setting `LLM_PROVIDER` to `google`, `openai`, or `ollama` (defaults to `google`).
+   - Choose which provider to use by setting `LLM_PROVIDER` to `google`, `openai`, `anthropic`, or `ollama` (defaults to `google`).
    - Provide the appropriate credentials for the selected provider:
 
      ```markdown
@@ -59,7 +59,10 @@ Follow these instructions to set up and run the project locally.
 
      # For OpenAI
      OPENAI_API_KEY=your_api_key_here
-        
+
+     # For Anthropic (Claude)
+     ANTHROPIC_API_KEY=your_api_key_here
+
      # For Ollama
      OLLAMA_SERVER_ADDRESS=http://localhost:11434
 

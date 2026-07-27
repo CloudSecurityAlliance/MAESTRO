@@ -32,11 +32,12 @@ npm run test:coverage    # Run tests with coverage
 
 ## Environment Variables
 
-Set `LLM_PROVIDER` to one of: `google`, `openai`, `ollama`
+Set `LLM_PROVIDER` to one of: `google`, `openai`, `anthropic`, `ollama`
 
 Required API keys based on provider:
 - Google: `GEMINI_API_KEY`
 - OpenAI: `OPENAI_API_KEY`
+- Anthropic: `ANTHROPIC_API_KEY`
 - Ollama: `OLLAMA_SERVER_ADDRESS`
 
 Optional: `LLM_MODEL` to override default model
@@ -47,7 +48,7 @@ Optional: `LLM_MODEL` to override default model
 
 **Key Directories**:
 - `/src/ai/` - Genkit configuration and AI flows
-  - `genkit.ts` - Provider setup (Google, OpenAI, Ollama)
+  - `genkit.ts` - Provider setup (Google, OpenAI, Anthropic, Ollama)
   - `/flows/` - AI workflow definitions (threat analysis, mitigations, summaries)
 - `/src/app/` - Next.js App Router
   - `actions.ts` - Server actions that invoke Genkit flows
