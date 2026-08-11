@@ -32,14 +32,38 @@ npm run test:coverage    # Run tests with coverage
 
 ## Environment Variables
 
-Set `LLM_PROVIDER` to one of: `google`, `openai`, `ollama`
+Set `LLM_PROVIDER` to one of: `google`, `openai`, `anthropic`, `ollama`
 
 Required API keys based on provider:
 - Google: `GEMINI_API_KEY`
 - OpenAI: `OPENAI_API_KEY`
+- Anthropic: `ANTHROPIC_API_KEY`
 - Ollama: `OLLAMA_SERVER_ADDRESS`
 
 Optional: `LLM_MODEL` to override default model
+
+Default models per provider: `gemini-2.5-flash` (google), `gpt-4o-mini` (openai),
+`claude-opus-4-7` (anthropic), `qwen3:8b` (ollama).
+
+**Note on the Anthropic default — read before changing it.** `@genkit-ai/anthropic`
+registers catalogued models (`KNOWN_MODELS`) with `output: ['text','json']` and
+`constrained: 'all'`; anything uncatalogued falls back to a generic profile
+declaring text-only output and no constrained generation. Every flow in
+`src/ai/flows/` defines an output schema, so an uncatalogued model shifts schema
+enforcement from Genkit's native constrained path to its simulated one.
+
+At plugin version 0.3.0 the catalog is:
+
+```
+claude-opus-4-7  claude-opus-4-6  claude-opus-4-5  claude-opus-4-1  claude-opus-4
+claude-sonnet-4-6  claude-sonnet-4-5  claude-sonnet-4  claude-haiku-4-5
+```
+
+`claude-opus-5` and `claude-sonnet-5` are **not** in it. They work via `LLM_MODEL`,
+but take the simulated path. Verify the catalog in
+`node_modules/@genkit-ai/anthropic/lib/models.js` before moving the default —
+the plugin's GitHub `main` branch is ahead of the published release, so reading
+the repo rather than the installed package will mislead you. See issue #8.
 
 ## Architecture
 
