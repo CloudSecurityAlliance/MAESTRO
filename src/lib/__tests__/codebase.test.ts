@@ -85,6 +85,6 @@ describe('source evidence', () => {
       evidence: Array.from({ length: 6 }, () => ({ path: 'p'.repeat(160), startLine: 100000, endLine: 100000, observation: 'o'.repeat(140) })),
       uncertainties: Array(3).fill('u'.repeat(120)),
     };
-    expect(formatCodebaseArchitecture(maximum, files).length).toBeLessThanOrEqual(5000);
+    expect(formatCodebaseArchitecture(maximum, files, { mappedFiles: 2000, selectionPasses: 2 }).length).toBeLessThanOrEqual(5000);
   });
 });

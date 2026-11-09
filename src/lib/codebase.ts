@@ -52,6 +52,10 @@ const SourceFileSchema = z.object({
 
 export const CodebaseInputSchema = z.object({
   files: z.array(SourceFileSchema).min(1).max(CODEBASE_LIMITS.files),
+  discovery: z.object({
+    mappedFiles: z.number().int().min(1).max(2000),
+    selectionPasses: z.number().int().min(1).max(2),
+  }).strict().optional(),
 }).strict();
 export type SourceFile = z.infer<typeof SourceFileSchema>;
 export type CodebaseInput = z.infer<typeof CodebaseInputSchema>;
@@ -85,6 +89,7 @@ export function validateCodebase(input: unknown): CodebaseInput {
     bytes += size;
   }
   if (bytes > CODEBASE_LIMITS.totalBytes) throw new Error('Source selection exceeds size limit');
+  if (parsed.discovery && parsed.discovery.mappedFiles < parsed.files.length) throw new Error('Invalid discovery coverage');
   return parsed;
 }
 
@@ -100,10 +105,11 @@ export function validateCodebaseOutput(output: unknown, files: SourceFile[]): Co
   return result;
 }
 
-export function formatCodebaseArchitecture(result: CodebaseOutput, files: SourceFile[]): string {
+export function formatCodebaseArchitecture(result: CodebaseOutput, files: SourceFile[], discovery?: CodebaseInput['discovery']): string {
   return [
     'Architecture inferred from selected source files (requires human review).',
     `Coverage: ${files.length} files, ${byteLength(files.map(file => file.content).join(''))} source bytes. Other files and runtime configuration were not inspected.`,
+    ...(discovery ? [`Automatic discovery: ${discovery.mappedFiles} eligible file paths mapped in ${discovery.selectionPasses} selection passes. A file appearing in the map does not mean its content was reviewed.`] : []),
     '', result.architecture,
     '', 'Code evidence:',
     ...result.evidence.map(item => `- ${item.path}:${item.startLine}-${item.endLine}: ${item.observation}`),
