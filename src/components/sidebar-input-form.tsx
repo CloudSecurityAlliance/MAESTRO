@@ -27,6 +27,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { USE_CASES } from "@/data/use-cases";
 import { Spinner } from "./icons";
 import { X } from "lucide-react";
+import { CodebaseInput } from "./codebase-input";
 
 const formSchema = z.object({
   architectureDescription: z
@@ -55,6 +56,8 @@ export function SidebarInputForm({
   buttonText,
   onDescriptionChange,
 }: SidebarInputFormProps) {
+  const [isPreparingCodebase, setIsPreparingCodebase] = React.useState(false);
+  const inputDisabled = isAnalyzing || isPreparingCodebase;
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -70,6 +73,7 @@ export function SidebarInputForm({
 
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    if (inputDisabled) return;
     onAnalyze(values.architectureDescription);
   }
 
@@ -88,6 +92,14 @@ export function SidebarInputForm({
         className="flex flex-col h-full"
       >
         <div className="flex-grow p-4 space-y-4 overflow-y-auto">
+          <CodebaseInput
+            disabled={isAnalyzing}
+            onBusyChange={setIsPreparingCodebase}
+            onArchitecture={(description) => {
+              form.setValue("architectureDescription", description, { shouldValidate: true, shouldDirty: true });
+              form.setValue("preset", "");
+            }}
+          />
           <FormField
             control={form.control}
             name="preset"
@@ -96,8 +108,8 @@ export function SidebarInputForm({
                 <FormLabel>Use-Case Presets</FormLabel>
                 <Select
                   onValueChange={handlePresetChange}
-                  defaultValue={field.value}
-                  disabled={isAnalyzing}
+                  value={field.value}
+                  disabled={inputDisabled}
                 >
                   <FormControl>
                     <SelectTrigger>
@@ -131,7 +143,7 @@ export function SidebarInputForm({
                     placeholder="Describe your system architecture in detail..."
                     className="resize-none h-64"
                     {...field}
-                    disabled={isAnalyzing}
+                    disabled={inputDisabled}
                   />
                 </FormControl>
                 <FormDescription>
@@ -150,7 +162,7 @@ export function SidebarInputForm({
                 Stop Analysis
               </Button>
             ) : (
-              <Button type="submit" className="w-full" disabled={isAnalyzing}>
+              <Button type="submit" className="w-full" disabled={inputDisabled}>
                 {isAnalyzing && <Spinner className="mr-2 h-4 w-4" />}
                 {buttonText}
               </Button>

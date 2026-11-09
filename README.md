@@ -16,6 +16,8 @@ We highly recommend reading the paper to understand the seven-layer architecture
 
 ## Features
 
+- **Source-Code Input**: Choose a local codebase folder or individual source files, review the selection, and extract an architecture description with file/line evidence and explicit unknowns. Review or edit that description before running the existing seven-layer analysis.
+
 - **Detailed Architecture Input**: Provides a textarea for users to describe their system architecture, which is used by the AI for analysis.
 - **Use-Case Presets**: Comes with pre-populated use-case descriptions that detail interactions between agents using protocols like **A2A (Agent-to-Agent)** and **MCP (Model Context Protocol)**.
 - **AI-Powered Threat Identification**: For each of the seven MAESTRO layers, the tool uses a Genkit flow to call the configured LLM provider. The AI identifies two categories of threats:
@@ -90,6 +92,22 @@ This project requires two processes to run concurrently: the Next.js frontend an
    This command starts the Genkit development server and automatically reloads it when you make changes to your AI flows.
 
 You can now open your browser and start using the MAESTRO Threat Analyzer.
+
+## Analyze a codebase
+
+1. In the sidebar, use **Start from source code** to choose a folder or individual files. Folder selection preserves paths relative to the chosen folder. Files are read locally at this stage.
+2. Review the file list and source previews. Uncheck any files you do not want to send. Common credential files, environment files, dependency directories, build output, binaries and lockfiles are excluded. The exclusions are conservative filename rules, not a complete secret detector or a `.gitignore` parser. Remove embedded secrets before extraction.
+3. Click **Extract Architecture**. The selected content is sent to the Next.js server and the configured `LLM_PROVIDER`/`LLM_MODEL`. A cloud provider receives the selected code; Ollama receives it at the configured server address. Provider policies and any enabled Genkit tracing also apply to this content.
+4. Review the populated **Architecture Description**, including source references and unknowns. References are checked against supplied paths and line ranges; a person must verify that each cited passage supports the model's interpretation.
+5. Click **Generate Analysis** to run the existing threat, mitigation and executive-summary workflow. The seven-layer analysis uses the extracted description and evidence, not a second pass over all raw files. Regenerate the optional diagram for the new architecture before exporting a report.
+
+Limits: at most **60 files**, **32 KiB per file**, and **160 KiB total source text** per extraction. Files are considered in path order. Oversized or excess files are skipped, with reasons shown in the UI. Choose a smaller subsystem or a curated set of entry points, API handlers, manifests, agent/tool definitions, authentication code and deployment configuration when a repository exceeds these limits. Files are not silently truncated. This first version does not merge multiple extractions or support ZIP archives and Git URLs.
+
+The application reads source without executing it. This is model-assisted architecture extraction and threat modeling, not a compiler-based static analyzer, dependency vulnerability scan, penetration test or verification of runtime controls. The normal text/preset input remains available. Extracted descriptions and selected content remain in the current browser session; the application does not add repository storage.
+
+### Development checks
+
+Use a Node.js version compatible with the locked dependencies (for example Node 22.12 or later). Run `npm ci`, `npm run test:run`, `npm run typecheck`, and `npm run build`. Codebase tests cover filtering, byte limits, evidence references, server validation and the UI handoff without calling a live model.
 
 ## How to Contribute
 
