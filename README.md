@@ -23,6 +23,7 @@ We highly recommend reading the paper to understand the seven-layer architecture
   - **Agentic Threats**: Novel threats or exacerbations of existing ones arising from factors like Non-Determinism, Autonomy, and No Trust Boundary.
 - **AI-Driven Mitigation Generation**: For each identified threat, the AI recommends specific mitigation strategies, including the reasoning behind them and any potential caveats.
 - **Real-Time Analysis & Logging**: The UI streams the analysis progress in real-time, providing detailed logs as the AI works through each of the seven MAESTRO layers.
+- **Threat-to-Control Validation (library)**: Deterministic scenarios and an evaluator for checking detection, enforcement and evidence for agent identity and delegation threats, without calling a model. See [docs/threat-control-validation.md](docs/threat-control-validation.md).
 
 ## Getting Started
 

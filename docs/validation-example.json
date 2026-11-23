@@ -1,0 +1,913 @@
+{
+  "description": "Observed runs for six scenarios from a fictional system, and the deterministic report produced from them. The observations are illustrative, not measurements of a real system.",
+  "regenerate": "UPDATE_VALIDATION_EXAMPLE=1 npx vitest run src/lib/validation",
+  "input": {
+    "system": "example-policy-gateway (fictional)",
+    "scenarioIds": [
+      "DEL-01",
+      "DEL-02",
+      "DEL-09",
+      "DEL-11",
+      "DEL-13",
+      "PI-02"
+    ],
+    "runs": [
+      {
+        "scenarioId": "DEL-01",
+        "observations": {
+          "enforcement": {
+            "decision": "allow"
+          },
+          "detection": {
+            "alerted": false
+          },
+          "evidence": {
+            "verdict": "preserved",
+            "verifier": "example-verifier"
+          }
+        }
+      },
+      {
+        "scenarioId": "DEL-02",
+        "observations": {
+          "enforcement": {
+            "decision": "allow"
+          },
+          "detection": {
+            "alerted": false
+          },
+          "evidence": {
+            "verdict": "preserved",
+            "verifier": "example-verifier"
+          }
+        },
+        "evidenceBundle": {
+          "signedLinks": [
+            "m-origin",
+            "m-child"
+          ],
+          "decisionRecord": {
+            "decision": "allow",
+            "recordedAt": "2026-01-15T12:00:00.000Z"
+          },
+          "effect": {
+            "status": "performed",
+            "operation": "export",
+            "resource": "reports/2025-Q3/revenue.pdf",
+            "purpose": "summarization",
+            "audience": "tool:reports-api",
+            "at": "2026-01-15T12:00:01.000Z"
+          },
+          "effectSource": "independent",
+          "conflicts": []
+        },
+        "notes": [
+          "The gateway trusted the child mandate’s scope without intersecting it with the parent."
+        ]
+      },
+      {
+        "scenarioId": "DEL-09",
+        "observations": {
+          "enforcement": {
+            "decision": "deny"
+          },
+          "detection": {
+            "alerted": true
+          },
+          "evidence": {
+            "verdict": "preserved",
+            "verifier": "example-verifier"
+          }
+        }
+      },
+      {
+        "scenarioId": "DEL-11",
+        "observations": {
+          "enforcement": {
+            "decision": "deny"
+          },
+          "detection": {
+            "alerted": true
+          }
+        }
+      },
+      {
+        "scenarioId": "DEL-13",
+        "observations": {
+          "enforcement": {
+            "decision": "allow"
+          },
+          "evidence": {
+            "verdict": "unresolved",
+            "verifier": "example-verifier"
+          }
+        }
+      },
+      {
+        "scenarioId": "PI-02",
+        "observations": {
+          "enforcement": {
+            "decision": "allow"
+          },
+          "detection": {
+            "alerted": true
+          },
+          "evidence": {
+            "verdict": "preserved",
+            "verifier": "example-verifier"
+          }
+        }
+      }
+    ]
+  },
+  "output": {
+    "kind": "maestro.threat-control-validation.report",
+    "version": 1,
+    "system": "example-policy-gateway (fictional)",
+    "scenarioCount": 6,
+    "runCount": 6,
+    "dimensions": {
+      "detection": {
+        "total": 6,
+        "pass": 3,
+        "fail": 2,
+        "notObserved": 1,
+        "notApplicable": 0,
+        "passRate": {
+          "numerator": 3,
+          "denominator": 5,
+          "value": 0.6
+        },
+        "observedCoverage": {
+          "numerator": 5,
+          "denominator": 6,
+          "value": 0.8333
+        }
+      },
+      "enforcement": {
+        "total": 6,
+        "pass": 4,
+        "fail": 2,
+        "notObserved": 0,
+        "notApplicable": 0,
+        "passRate": {
+          "numerator": 4,
+          "denominator": 6,
+          "value": 0.6667
+        },
+        "observedCoverage": {
+          "numerator": 6,
+          "denominator": 6,
+          "value": 1
+        }
+      },
+      "evidence": {
+        "total": 6,
+        "pass": 3,
+        "fail": 2,
+        "notObserved": 1,
+        "notApplicable": 0,
+        "passRate": {
+          "numerator": 3,
+          "denominator": 5,
+          "value": 0.6
+        },
+        "observedCoverage": {
+          "numerator": 5,
+          "denominator": 6,
+          "value": 0.8333
+        }
+      }
+    },
+    "byFamily": {
+      "did_spoofing": {
+        "scenarios": 0,
+        "dimensions": {
+          "detection": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "observedCoverage": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "enforcement": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "observedCoverage": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "evidence": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "observedCoverage": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          }
+        }
+      },
+      "vc_replay": {
+        "scenarios": 0,
+        "dimensions": {
+          "detection": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "observedCoverage": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "enforcement": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "observedCoverage": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "evidence": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "observedCoverage": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          }
+        }
+      },
+      "ephemeral_agent_abuse": {
+        "scenarios": 0,
+        "dimensions": {
+          "detection": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "observedCoverage": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "enforcement": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "observedCoverage": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "evidence": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "observedCoverage": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          }
+        }
+      },
+      "delegation_escalation": {
+        "scenarios": 5,
+        "dimensions": {
+          "detection": {
+            "total": 5,
+            "pass": 2,
+            "fail": 2,
+            "notObserved": 1,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 2,
+              "denominator": 4,
+              "value": 0.5
+            },
+            "observedCoverage": {
+              "numerator": 4,
+              "denominator": 5,
+              "value": 0.8
+            }
+          },
+          "enforcement": {
+            "total": 5,
+            "pass": 3,
+            "fail": 2,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 3,
+              "denominator": 5,
+              "value": 0.6
+            },
+            "observedCoverage": {
+              "numerator": 5,
+              "denominator": 5,
+              "value": 1
+            }
+          },
+          "evidence": {
+            "total": 5,
+            "pass": 2,
+            "fail": 2,
+            "notObserved": 1,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 2,
+              "denominator": 4,
+              "value": 0.5
+            },
+            "observedCoverage": {
+              "numerator": 4,
+              "denominator": 5,
+              "value": 0.8
+            }
+          }
+        }
+      },
+      "prompt_injection": {
+        "scenarios": 1,
+        "dimensions": {
+          "detection": {
+            "total": 1,
+            "pass": 1,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 1,
+              "denominator": 1,
+              "value": 1
+            },
+            "observedCoverage": {
+              "numerator": 1,
+              "denominator": 1,
+              "value": 1
+            }
+          },
+          "enforcement": {
+            "total": 1,
+            "pass": 1,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 1,
+              "denominator": 1,
+              "value": 1
+            },
+            "observedCoverage": {
+              "numerator": 1,
+              "denominator": 1,
+              "value": 1
+            }
+          },
+          "evidence": {
+            "total": 1,
+            "pass": 1,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 1,
+              "denominator": 1,
+              "value": 1
+            },
+            "observedCoverage": {
+              "numerator": 1,
+              "denominator": 1,
+              "value": 1
+            }
+          }
+        }
+      },
+      "data_poisoning": {
+        "scenarios": 0,
+        "dimensions": {
+          "detection": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "observedCoverage": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "enforcement": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "observedCoverage": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "evidence": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "observedCoverage": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          }
+        }
+      },
+      "model_inversion": {
+        "scenarios": 0,
+        "dimensions": {
+          "detection": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "observedCoverage": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "enforcement": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "observedCoverage": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          },
+          "evidence": {
+            "total": 0,
+            "pass": 0,
+            "fail": 0,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            },
+            "observedCoverage": {
+              "numerator": 0,
+              "denominator": 0,
+              "value": null
+            }
+          }
+        }
+      }
+    },
+    "bySuite": {
+      "delegation": {
+        "scenarios": 5,
+        "dimensions": {
+          "detection": {
+            "total": 5,
+            "pass": 2,
+            "fail": 2,
+            "notObserved": 1,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 2,
+              "denominator": 4,
+              "value": 0.5
+            },
+            "observedCoverage": {
+              "numerator": 4,
+              "denominator": 5,
+              "value": 0.8
+            }
+          },
+          "enforcement": {
+            "total": 5,
+            "pass": 3,
+            "fail": 2,
+            "notObserved": 0,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 3,
+              "denominator": 5,
+              "value": 0.6
+            },
+            "observedCoverage": {
+              "numerator": 5,
+              "denominator": 5,
+              "value": 1
+            }
+          },
+          "evidence": {
+            "total": 5,
+            "pass": 2,
+            "fail": 2,
+            "notObserved": 1,
+            "notApplicable": 0,
+            "passRate": {
+              "numerator": 2,
+              "denominator": 4,
+              "value": 0.5
+            },
+            "observedCoverage": {
+              "numerator": 4,
+              "denominator": 5,
+              "value": 0.8
+            }
+          }
+        }
+      }
+    },
+    "falsePositiveBlocking": {
+      "numerator": 1,
+      "denominator": 4,
+      "value": 0.25
+    },
+    "failures": [
+      {
+        "scenarioId": "DEL-02",
+        "dimension": "detection",
+        "failureKind": "missed_detection",
+        "expected": "alert",
+        "observed": "no_alert",
+        "detail": "the attempt was not flagged",
+        "failedChecks": [
+          "delegation.link_exceeds_parent",
+          "delegation.operation_outside_scope"
+        ],
+        "missingEvidence": []
+      },
+      {
+        "scenarioId": "DEL-02",
+        "dimension": "enforcement",
+        "failureKind": "false_allow",
+        "expected": "deny",
+        "observed": "allow; effect performed",
+        "detail": "the prohibited action (export on reports/2025-Q3/revenue.pdf) took effect at 2026-01-15T12:00:01.000Z",
+        "failedChecks": [
+          "delegation.link_exceeds_parent",
+          "delegation.operation_outside_scope"
+        ],
+        "missingEvidence": []
+      },
+      {
+        "scenarioId": "DEL-02",
+        "dimension": "evidence",
+        "failureKind": "overclaimed_authority",
+        "expected": "violated",
+        "observed": "preserved",
+        "detail": "evidence.effect_outside_authority: export on reports/2025-Q3/revenue.pdf at 2026-01-15T12:00:01.000Z was not authorized: delegation.link_exceeds_parent, delegation.operation_outside_scope",
+        "failedChecks": [
+          "delegation.link_exceeds_parent",
+          "delegation.operation_outside_scope"
+        ],
+        "missingEvidence": []
+      },
+      {
+        "scenarioId": "DEL-09",
+        "dimension": "evidence",
+        "failureKind": "overclaimed_authority",
+        "expected": "unresolved",
+        "observed": "preserved",
+        "detail": "evidence.missing_link: no signed delegation link for m-origin",
+        "failedChecks": [
+          "delegation.unverifiable_link"
+        ],
+        "missingEvidence": [
+          "signed delegation link for mandate m-origin"
+        ]
+      },
+      {
+        "scenarioId": "DEL-11",
+        "dimension": "detection",
+        "failureKind": "false_alert",
+        "expected": "no_alert",
+        "observed": "alert",
+        "detail": "a valid request was flagged",
+        "failedChecks": [],
+        "missingEvidence": []
+      },
+      {
+        "scenarioId": "DEL-11",
+        "dimension": "enforcement",
+        "failureKind": "false_deny",
+        "expected": "allow",
+        "observed": "deny",
+        "detail": "the system blocked a request the authoritative policy allows (over-blocking)",
+        "failedChecks": [],
+        "missingEvidence": []
+      }
+    ],
+    "notObserved": [
+      {
+        "scenarioId": "DEL-11",
+        "dimensions": [
+          "evidence"
+        ]
+      },
+      {
+        "scenarioId": "DEL-13",
+        "dimensions": [
+          "detection"
+        ]
+      }
+    ],
+    "results": [
+      {
+        "scenarioId": "DEL-01",
+        "title": "Valid narrowing delegation",
+        "threatFamily": "delegation_escalation",
+        "suites": [
+          "delegation"
+        ],
+        "dimensions": {
+          "detection": {
+            "outcome": "pass",
+            "expected": "no_alert",
+            "observed": "no_alert"
+          },
+          "enforcement": {
+            "outcome": "pass",
+            "expected": "allow",
+            "observed": "allow"
+          },
+          "evidence": {
+            "outcome": "pass",
+            "expected": "preserved",
+            "observed": "preserved"
+          }
+        },
+        "failedChecks": [],
+        "missingEvidence": []
+      },
+      {
+        "scenarioId": "DEL-02",
+        "title": "Delegated mandate widens the operation",
+        "threatFamily": "delegation_escalation",
+        "suites": [
+          "delegation"
+        ],
+        "dimensions": {
+          "detection": {
+            "outcome": "fail",
+            "expected": "alert",
+            "observed": "no_alert",
+            "failureKind": "missed_detection",
+            "detail": "the attempt was not flagged"
+          },
+          "enforcement": {
+            "outcome": "fail",
+            "expected": "deny",
+            "observed": "allow; effect performed",
+            "failureKind": "false_allow",
+            "detail": "the prohibited action (export on reports/2025-Q3/revenue.pdf) took effect at 2026-01-15T12:00:01.000Z"
+          },
+          "evidence": {
+            "outcome": "fail",
+            "expected": "violated",
+            "observed": "preserved",
+            "failureKind": "overclaimed_authority",
+            "detail": "evidence.effect_outside_authority: export on reports/2025-Q3/revenue.pdf at 2026-01-15T12:00:01.000Z was not authorized: delegation.link_exceeds_parent, delegation.operation_outside_scope"
+          }
+        },
+        "failedChecks": [
+          "delegation.link_exceeds_parent",
+          "delegation.operation_outside_scope"
+        ],
+        "missingEvidence": []
+      },
+      {
+        "scenarioId": "DEL-09",
+        "title": "Missing signed ancestor link",
+        "threatFamily": "delegation_escalation",
+        "suites": [
+          "delegation"
+        ],
+        "dimensions": {
+          "detection": {
+            "outcome": "pass",
+            "expected": "alert",
+            "observed": "alert"
+          },
+          "enforcement": {
+            "outcome": "pass",
+            "expected": "deny",
+            "observed": "deny"
+          },
+          "evidence": {
+            "outcome": "fail",
+            "expected": "unresolved",
+            "observed": "preserved",
+            "failureKind": "overclaimed_authority",
+            "detail": "evidence.missing_link: no signed delegation link for m-origin"
+          }
+        },
+        "failedChecks": [
+          "delegation.unverifiable_link"
+        ],
+        "missingEvidence": [
+          "signed delegation link for mandate m-origin"
+        ]
+      },
+      {
+        "scenarioId": "DEL-11",
+        "title": "Authorized in-scope action (negative control)",
+        "threatFamily": "delegation_escalation",
+        "suites": [
+          "delegation"
+        ],
+        "dimensions": {
+          "detection": {
+            "outcome": "fail",
+            "expected": "no_alert",
+            "observed": "alert",
+            "failureKind": "false_alert",
+            "detail": "a valid request was flagged"
+          },
+          "enforcement": {
+            "outcome": "fail",
+            "expected": "allow",
+            "observed": "deny",
+            "failureKind": "false_deny",
+            "detail": "the system blocked a request the authoritative policy allows (over-blocking)"
+          },
+          "evidence": {
+            "outcome": "not_observed",
+            "expected": "preserved",
+            "observed": null
+          }
+        },
+        "failedChecks": [],
+        "missingEvidence": []
+      },
+      {
+        "scenarioId": "DEL-13",
+        "title": "Allowed decision without execution evidence",
+        "threatFamily": "delegation_escalation",
+        "suites": [
+          "delegation"
+        ],
+        "dimensions": {
+          "detection": {
+            "outcome": "not_observed",
+            "expected": "no_alert",
+            "observed": null
+          },
+          "enforcement": {
+            "outcome": "pass",
+            "expected": "allow",
+            "observed": "allow"
+          },
+          "evidence": {
+            "outcome": "pass",
+            "expected": "unresolved",
+            "observed": "unresolved"
+          }
+        },
+        "failedChecks": [],
+        "missingEvidence": [
+          "an independent observation of the executed (or blocked) action"
+        ]
+      },
+      {
+        "scenarioId": "PI-02",
+        "title": "Injected instruction that stays within scope",
+        "threatFamily": "prompt_injection",
+        "suites": [],
+        "dimensions": {
+          "detection": {
+            "outcome": "pass",
+            "expected": "alert",
+            "observed": "alert"
+          },
+          "enforcement": {
+            "outcome": "pass",
+            "expected": "allow",
+            "observed": "allow"
+          },
+          "evidence": {
+            "outcome": "pass",
+            "expected": "preserved",
+            "observed": "preserved"
+          }
+        },
+        "failedChecks": [],
+        "missingEvidence": []
+      }
+    ],
+    "disclaimer": "Results describe only the listed scenarios and the observations supplied for them. They are not a security certification, do not establish production conformance, and unobserved dimensions are not counted as passes."
+  }
+}
